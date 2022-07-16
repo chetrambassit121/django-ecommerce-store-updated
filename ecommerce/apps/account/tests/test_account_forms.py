@@ -21,3 +21,20 @@ def test_customer_add(full_name, phone, address_line, address_line2, town_city, 
         }
     )
     assert form.is_valid() is validity
+
+
+def test_customer_create_address(client, customer):
+    user = customer
+    client.force_login(user)
+    response = client.post(
+        "/account/add_address/",
+        data={
+            "full_name": "test",
+            "phone": "test",
+            "address_line": "test",
+            "address_line2": "test",
+            "town_city": "test",
+            "postcode": "test",
+        },
+    )
+    assert response.status_code == 302

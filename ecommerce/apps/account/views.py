@@ -118,6 +118,20 @@ def view_address(request):
     return render(request, "account/dashboard/addresses.html", {"addresses": addresses})
 
 
+# @login_required
+# def add_address(request):
+#     if request.method == "POST":
+#         address_form = UserAddressForm(data=request.POST)
+#         if address_form.is_valid():
+#             address_form = address_form.save(commit=False)
+#             address_form.customer = request.user
+#             address_form.save()
+#             return HttpResponseRedirect(reverse("account:addresses"))
+#     else:
+#         address_form = UserAddressForm()
+#     return render(request, "account/dashboard/edit_addresses.html", {"form": address_form})
+
+
 @login_required
 def add_address(request):
     if request.method == "POST":
@@ -127,6 +141,8 @@ def add_address(request):
             address_form.customer = request.user
             address_form.save()
             return HttpResponseRedirect(reverse("account:addresses"))
+        else:
+            return HttpResponse("Error handler content", status=400)
     else:
         address_form = UserAddressForm()
     return render(request, "account/dashboard/edit_addresses.html", {"form": address_form})
