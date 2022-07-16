@@ -1,5 +1,5 @@
 import factory
-from ecommerce.apps.catalogue.models import Category
+from ecommerce.apps.catalogue.models import Category, ProductType
 from faker import Faker
 
 fake = Faker()
@@ -15,3 +15,10 @@ class CategoryFactory(factory.django.DjangoModelFactory):
 
     name = "django"
     slug = "django"
+
+
+class ProductTypeFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = ProductType
+
+    name = "book"

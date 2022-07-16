@@ -11,3 +11,7 @@ def test_category_reverse(client, product_category):
     url = reverse("catalogue:category_list", args=[category])
     response = client.get(url)
     assert response.status_code == 200
+
+
+def test_producttype_str(product_type):
+    assert product_type.__str__() == "book"
