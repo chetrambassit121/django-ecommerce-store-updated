@@ -15,3 +15,7 @@ def test_category_reverse(client, product_category):
 
 def test_producttype_str(product_type):
     assert product_type.__str__() == "book"
+
+
+def test_product_spec_str(product_specification):
+    assert product_specification.__str__() == "pages"
