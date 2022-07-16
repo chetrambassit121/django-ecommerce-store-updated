@@ -3,15 +3,17 @@ from pytest_factoryboy import register
 
 from tests.factories import (
     CategoryFactory,
-    ProductSpecificationFactory,
-    ProductTypeFactory,
     ProductFactory,
+    ProductSpecificationFactory,
+    ProductSpecificationValueFactory,
+    ProductTypeFactory,
 )
 
 register(CategoryFactory)
 register(ProductTypeFactory)
 register(ProductSpecificationFactory)
 register(ProductFactory)
+register(ProductSpecificationValueFactory)
 
 
 @pytest.fixture
@@ -38,22 +40,7 @@ def product(db, product_factory):
     return product
 
 
-# import pytest
-
-
-# @pytest.fixture(scope="session")
-# def test_fixture1():
-#     print("Run once")
-#     return 1
-
-
-# @pytest.fixture(scope="session")
-# def test_fixture1():
-#     print("Run once")
-#     return 1
-
-
-# @pytest.fixture(scope="session")
-# def test_fixture1():
-#     print("Run once")
-#     return 1
+@pytest.fixture
+def product_spec_value(db, product_specification_value_factory):
+    product_spec_value = product_specification_value_factory.create()
+    return product_spec_value
