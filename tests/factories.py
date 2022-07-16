@@ -1,5 +1,5 @@
 import factory
-from ecommerce.apps.catalogue.models import Category, ProductType, ProductSpecification
+from ecommerce.apps.catalogue.models import Category, ProductType, ProductSpecification, Product
 from faker import Faker
 
 fake = Faker()
@@ -30,3 +30,16 @@ class ProductSpecificationFactory(factory.django.DjangoModelFactory):
 
     product_type = factory.SubFactory(ProductTypeFactory)
     name = "pages"
+
+
+class ProductFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Product
+
+    product_type = factory.SubFactory(ProductTypeFactory)
+    category = factory.SubFactory(CategoryFactory)
+    title = "product_title"
+    description = fake.text()
+    slug = "product_slug"
+    regular_price = "9.99"
+    discount_price = "4.99"

@@ -5,11 +5,13 @@ from tests.factories import (
     CategoryFactory,
     ProductSpecificationFactory,
     ProductTypeFactory,
+    ProductFactory,
 )
 
 register(CategoryFactory)
 register(ProductTypeFactory)
 register(ProductSpecificationFactory)
+register(ProductFactory)
 
 
 @pytest.fixture
@@ -28,6 +30,12 @@ def product_type(db, product_type_factory):
 def product_specification(db, product_specification_factory):
     product_spec = product_specification_factory.create()
     return product_spec
+
+
+@pytest.fixture
+def product(db, product_factory):
+    product = product_factory.create()
+    return product
 
 
 # import pytest

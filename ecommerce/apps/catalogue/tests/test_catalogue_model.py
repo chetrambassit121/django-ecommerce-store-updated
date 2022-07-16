@@ -19,3 +19,10 @@ def test_producttype_str(product_type):
 
 def test_product_spec_str(product_specification):
     assert product_specification.__str__() == "pages"
+
+
+def test_product_url_resolve(client, product):
+    slug = "product_slug"
+    url = reverse("catalogue:product_detail", args=[slug])
+    response = client.get(url)
+    assert response.status_code == 200
