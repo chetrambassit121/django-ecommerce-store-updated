@@ -31,3 +31,15 @@ def test_adminuser_email_incorrect(customer_factory):
     with pytest.raises(ValueError) as e:
         test = customer_factory.create(email="a.com", is_superuser=True, is_staff=True)
     assert str(e.value) == "You must provide a valid email address"
+
+
+def test_adminuser_email_not_staff(customer_factory):
+    with pytest.raises(ValueError) as e:
+        test = customer_factory.create(email="", is_superuser=True, is_staff=False)
+    assert str(e.value) == "Superuser must be assigned to is_staff=True."
+
+
+def test_adminuser_email_not_superuser(customer_factory):
+    with pytest.raises(ValueError) as e:
+        test = customer_factory.create(email="a.com", is_superuser=False, is_staff=True)
+    assert str(e.value) == "Superuser must be assigned to is_superuser=True."
