@@ -12,4 +12,10 @@ def test_admin_user_str(adminuser):
 def test_customer_email_no_input(customer_factory):
     with pytest.raises(ValueError) as e:
         test = customer_factory.create(email="")
-    assert str(e.value) == "You must provide an email address"
+    assert str(e.value) == "Customer Account: You must provide an email address"
+
+
+def test_customer_email_incorrect(customer_factory):
+    with pytest.raises(ValueError) as e:
+        test = customer_factory.create(email="a.com")
+    assert str(e.value) == "You must provide a valid email address"
