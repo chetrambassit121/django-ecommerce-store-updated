@@ -1,0 +1,7 @@
+command prompt to run pytests 
+
+pytest    ... tests all tests 
+
+pytest tests/catalogue/test_catalogue.py     .. tests specfic tests 
+
+pytest -rP         ... tests each fixture function 
