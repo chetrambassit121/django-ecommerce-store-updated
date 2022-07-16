@@ -109,4 +109,5 @@ class Address(models.Model):
         verbose_name_plural = "Addresses"
 
     def __str__(self):
-        return "Address"
+        # return "Address"
+        return "{} Address".format(self.full_name)

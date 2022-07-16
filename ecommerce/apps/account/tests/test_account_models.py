@@ -43,3 +43,8 @@ def test_adminuser_email_not_superuser(customer_factory):
     with pytest.raises(ValueError) as e:
         test = customer_factory.create(email="a.com", is_superuser=False, is_staff=True)
     assert str(e.value) == "Superuser must be assigned to is_superuser=True."
+
+
+def test_address_str(address):
+    name = address.full_name
+    assert address.__str__() == name + " Address"
