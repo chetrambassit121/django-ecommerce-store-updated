@@ -61,3 +61,38 @@ def test_create_account(user_name, email, password, password2, validity):
         },
     )
     assert form.is_valid() is validity
+
+
+@pytest.mark.parametrize(
+    "user_name, email, password, password2, validity",
+    [
+        ("user1", "a@a.com", "12345a", "12345a", 200),
+        ("user1", "a@a.com", "12345a", "12345", 400),
+        ("user1", "", "12345a", "12345", 400),
+    ],
+)
+@pytest.mark.django_db
+def test_create_account_view(client, user_name, email, password, password2, validity):
+    response = client.post(
+        "/account/register/",
+        data={
+            "user_name": user_name,
+            "email": email,
+            "password": password,
+            "password2": password2,
+        },
+    )
+    assert response.status_code == validity
+
+
+def test_account_register_redirect(client, customer):
+    user = customer
+    client.force_login(user)
+    response = client.get("/account/register/")
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_account_register_render(client):
+    response = client.get("/account/register/")
+    assert response.status_code == 200
