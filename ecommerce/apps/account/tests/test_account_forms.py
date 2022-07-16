@@ -38,3 +38,26 @@ def test_customer_create_address(client, customer):
         },
     )
     assert response.status_code == 302
+
+
+@pytest.mark.parametrize(
+    "user_name, email, password, password2, validity",
+    [
+        ("user1", "a@a.com", "12345a", "12345a", True),
+        ("user1", "a@a.com", "12345a", "", False),  # no second password
+        # ("user1", "a@a.com", "", "12345a", False),  # no first password
+        ("user1", "a@a.com", "12345a", "12345b", False),  # password mismatch
+        ("user1", "a@.com", "12345a", "12345a", False),  # email
+    ],
+)
+@pytest.mark.django_db
+def test_create_account(user_name, email, password, password2, validity):
+    form = RegistrationForm(
+        data={
+            "user_name": user_name,
+            "email": email,
+            "password": password,
+            "password2": password2,
+        },
+    )
+    assert form.is_valid() is validity
