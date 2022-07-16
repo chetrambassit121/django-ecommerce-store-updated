@@ -5,3 +5,7 @@ pytest    ... tests all tests
 pytest tests/catalogue/test_catalogue.py     .. tests specfic tests 
 
 pytest -rP         ... tests each fixture function 
+
+coverage run -m pytest      ... running coverage and pytest 
+
+coverage html        .... running coverages html 
